@@ -7,10 +7,13 @@ public class Player : MonoBehaviour
 
     public float speed;
     public GameObject bullet;
+    private SpriteRenderer shipRenderer;
+
+    private int lives = 5;
 
     void Start()
     {
-
+        shipRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -29,5 +32,31 @@ public class Player : MonoBehaviour
         {
             GameObject bulletInstance = Instantiate(bullet, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.Euler(0,0,-90));
         }
+        if(lives == 0)
+        {
+            GManager.instance.protocolEndgame();
+            Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collisionObject)
+    {
+        if (collisionObject.gameObject.CompareTag("Missile") || collisionObject.gameObject.CompareTag("Meteor") || collisionObject.gameObject.CompareTag("EnemyShip"))
+        {
+            lives = lives - 1;
+            GManager.instance.updateHP(lives);
+            damageDisplay();
+        }
+    }
+
+    void damageDisplay()
+    {
+        shipRenderer.color = new Color(0.8509804f, 0.1882353f, 0.1882353f);
+        Invoke("colorNormalize", 1.0f);
+    }
+
+    void colorNormalize()
+    {
+        shipRenderer.color = Color.white;
     }
 }

@@ -143,3 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyTime: 10
   verticalMovement: 0.08
+  enemyMissile: {fileID: 8521827310059332627, guid: e9f04809bd5291f45af338294e4cb3b4,
+    type: 3}

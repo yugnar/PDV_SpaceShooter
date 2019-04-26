@@ -7,6 +7,9 @@ TagManager:
   - PlayerShip
   - EnemyShip
   - Meteor
+  - Bullet
+  - Boundary
+  - Missile
   layers:
   - Default
   - TransparentFX

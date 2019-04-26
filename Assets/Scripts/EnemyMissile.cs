@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Meteor : MonoBehaviour
+public class EnemyMissile : MonoBehaviour
 {
     public float destroyTime = 10f;
-    private int lives = 5;
 
     void Start()
     {
@@ -16,13 +15,8 @@ public class Meteor : MonoBehaviour
     void Update()
     {
         var position = gameObject.transform.position;
-        position.x += -0.12f;
+        position.x += -0.25f;
         gameObject.transform.position = position;
-
-        if(lives == 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     void OnTriggerEnter2D(Collider2D collisionObject)
@@ -30,10 +24,6 @@ public class Meteor : MonoBehaviour
         if (collisionObject.gameObject.CompareTag("PlayerShip"))
         {
             Destroy(gameObject);
-        }
-        if (collisionObject.gameObject.CompareTag("Bullet"))
-        {
-            lives = lives - 1;
         }
     }
 }
